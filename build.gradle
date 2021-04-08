@@ -14,6 +14,7 @@ buildscript {
 plugins {
     id "org.jetbrains.kotlin.jvm" version "1.4.32"
     id "com.github.johnrengelman.shadow" version "6.0.0"
+    id "kr.entree.spigradle" version "2.2.3"
     id "java-library"
 }
 
@@ -30,8 +31,9 @@ repositories {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    compileOnly spigot("1.16.5")
 
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
     implementation "com.gigadrivegroup:kotlin-commons:1.2"
 }
 
@@ -58,4 +60,8 @@ tasks.shadowJar {
 
 tasks.build {
     dependsOn(shadowJar)
+}
+
+spigot {
+    authors "Gigadrive UG"
 }
