@@ -1,0 +1,61 @@
+buildscript {
+    ext.kotlin_version = "1.4.32"
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    }
+}
+
+
+plugins {
+    id "org.jetbrains.kotlin.jvm" version "1.4.32"
+    id "com.github.johnrengelman.shadow" version "6.0.0"
+    id "java-library"
+}
+
+group "com.gigadrivegroup"
+version "1.0-SNAPSHOT"
+
+def javaVersion = JavaVersion.VERSION_1_8
+
+repositories {
+    mavenCentral()
+    jcenter()
+
+    maven { url "https://gitlab.com/api/v4/projects/23841941/packages/maven" }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+
+    implementation "com.gigadrivegroup:kotlin-commons:1.2"
+}
+
+kotlin {
+    explicitApi()
+}
+
+// configures both compileKotlin and compileTestKotlin
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile) {
+    kotlinOptions.jvmTarget = javaVersion.toString()
+}
+
+java {
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
+
+    withJavadocJar()
+    withSourcesJar()
+}
+
+tasks.shadowJar {
+    minimize()
+}
+
+tasks.build {
+    dependsOn(shadowJar)
+}
