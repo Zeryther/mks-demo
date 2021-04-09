@@ -1,6 +1,8 @@
 # mks-demo Project
 
 This project is an example exercise Spigot plugin, that saves the coordinates of opened trapdoors in a MySQL database.
+For inserting and deleting from the database, a QueueManager class is used that manages the data in the background to
+avoid problems if a player should spam a trapdoor.
 
 This plugin utilizes the [kotlin-commons Gigadrive library](https://gitlab.com/Gigadrive/kotlin-commons).
 
