@@ -1,4 +1,6 @@
+# Whether or not to enable the trapdoor logging feature
 enabled: true
+# The MySQL database connection details
 mysql:
     host: localhost
     port: 3306
