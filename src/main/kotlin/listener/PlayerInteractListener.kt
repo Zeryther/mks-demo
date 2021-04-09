@@ -26,7 +26,7 @@ public class PlayerInteractListener : Listener {
         val trapdoor = clickedBlock.blockData as TrapDoor
 
         val action =
-            if (trapdoor.isOpen) {
+            if (!trapdoor.isOpen) { // invert state for PlayerInteractEvent
                 QueueEntryAction.ADD
             } else {
                 QueueEntryAction.REMOVE

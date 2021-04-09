@@ -4,6 +4,7 @@ import com.gigadrivegroup.kotlincommons.feature.CommonsManager
 import com.gigadrivegroup.kotlincommons.feature.bind
 import com.gigadrivegroup.kotlincommons.feature.initDependencyInjection
 import com.gigadrivegroup.kotlincommons.manager.DatabaseManager
+import com.gigadrivegroup.mksdemo.listener.BlockBreakListener
 import com.gigadrivegroup.mksdemo.listener.PlayerInteractListener
 import com.gigadrivegroup.mksdemo.manager.CoordinatesManager
 import com.gigadrivegroup.mksdemo.manager.QueueManager
@@ -60,6 +61,7 @@ public class MKSDemo : JavaPlugin() {
         bind(QueueManager())
 
         // listeners
+        server.pluginManager.registerEvents(BlockBreakListener(), this)
         server.pluginManager.registerEvents(PlayerInteractListener(), this)
     }
 
