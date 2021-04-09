@@ -4,6 +4,7 @@ import com.gigadrivegroup.kotlincommons.feature.CommonsManager
 import com.gigadrivegroup.kotlincommons.feature.bind
 import com.gigadrivegroup.kotlincommons.feature.initDependencyInjection
 import com.gigadrivegroup.kotlincommons.manager.DatabaseManager
+import com.gigadrivegroup.mksdemo.manager.CoordinatesManager
 import kr.entree.spigradle.annotations.SpigotPlugin
 import org.bukkit.plugin.java.JavaPlugin
 
@@ -52,6 +53,8 @@ public class MKSDemo : JavaPlugin() {
             server.pluginManager.disablePlugin(this)
             return
         }
+
+        bind(CoordinatesManager())
     }
 
     override fun onDisable() {
