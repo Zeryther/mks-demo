@@ -15,7 +15,7 @@ public class CoordinatesManager : CommonsManager() {
         try {
             val ps =
                 databaseManager.prepareStatement(
-                    "INSERT INTO `coordinates` (`world`,`x`,`y`,`z`) VALUES(?,?,?,?)")
+                    "INSERT IGNORE INTO `coordinates` (`world`,`x`,`y`,`z`) VALUES(?,?,?,?)")
             ps.setString(1, location.world?.name ?: "world")
             ps.setInt(2, location.blockX)
             ps.setInt(3, location.blockY)
