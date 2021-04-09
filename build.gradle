@@ -34,6 +34,7 @@ dependencies {
     compileOnly spigot("1.16.5")
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3"
     implementation "com.gigadrivegroup:kotlin-commons:1.2"
 }
 
@@ -64,4 +65,9 @@ tasks.build {
 
 spigot {
     authors "Gigadrive UG"
+    apiVersion "1.16"
+
+    debug {
+        buildVersion = "1.16.5"
+    }
 }

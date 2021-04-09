@@ -21,7 +21,7 @@ public class CoordinatesManager : CommonsManager() {
             ps.setInt(3, location.blockY)
             ps.setInt(4, location.blockZ)
             ps.execute()
-            ps.close()
+            databaseManager.closeResources(ps)
         } catch (e: Exception) {
             Logger.error("Failed to log coordinates at $location")
             Logger.error("${e.javaClass.simpleName}: ${e.message}")
@@ -39,7 +39,7 @@ public class CoordinatesManager : CommonsManager() {
             ps.setInt(3, location.blockY)
             ps.setInt(4, location.blockZ)
             ps.execute()
-            ps.close()
+            databaseManager.closeResources(ps)
         } catch (e: Exception) {
             Logger.error("Failed to log coordinates at $location")
             Logger.error("${e.javaClass.simpleName}: ${e.message}")

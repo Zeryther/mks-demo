@@ -4,7 +4,9 @@ import com.gigadrivegroup.kotlincommons.feature.CommonsManager
 import com.gigadrivegroup.kotlincommons.feature.bind
 import com.gigadrivegroup.kotlincommons.feature.initDependencyInjection
 import com.gigadrivegroup.kotlincommons.manager.DatabaseManager
+import com.gigadrivegroup.mksdemo.listener.PlayerInteractListener
 import com.gigadrivegroup.mksdemo.manager.CoordinatesManager
+import com.gigadrivegroup.mksdemo.manager.QueueManager
 import kr.entree.spigradle.annotations.SpigotPlugin
 import org.bukkit.plugin.java.JavaPlugin
 
@@ -44,7 +46,7 @@ public class MKSDemo : JavaPlugin() {
                 databaseManager.prepareStatement(
                     "CREATE TABLE IF NOT EXISTS `coordinates` (world VARCHAR(32) NOT NULL, x INT NOT NULL, y INT NOT NULL, z INT NOT NULL, CONSTRAINT coordinates_pk PRIMARY KEY (world, x, y, z));")
             createTable.execute()
-            createTable.close()
+            databaseManager.closeResources(createTable)
         } catch (e: Exception) {
             Logger.error("An error occurred while connecting to the database.")
             Logger.error("${e.javaClass.simpleName}: ${e.message}")
@@ -55,6 +57,10 @@ public class MKSDemo : JavaPlugin() {
         }
 
         bind(CoordinatesManager())
+        bind(QueueManager())
+
+        // listeners
+        server.pluginManager.registerEvents(PlayerInteractListener(), this)
     }
 
     override fun onDisable() {
